@@ -10,11 +10,7 @@ app.use(bodyParser.json())
 
 app.use('/animals', animalsRoutes);
 
-//client.connect();
-
 app.get('/', (req,res) => res.send("Hello"));
-
-
 
 app.listen(port, () => {
   console.log(`API server is listening on PORT ${port}`)
