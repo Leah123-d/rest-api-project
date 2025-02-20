@@ -16,3 +16,4 @@ VALUES
     ('Ostrich', 'Struthio camelus', 83, 'savannah', 'carnivore'),
     ('Jaguar', 'Panthera onca', 28, 'tundra', 'herbivore'),
     ('Tortoise, desert', 'Gopherus agassizii', 64, 'desert', 'herbivore');
+
