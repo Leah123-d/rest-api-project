@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-  
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js"
@@ -16,7 +15,8 @@
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "express": "^4.21.2",
-    "pg": "^8.13.3"
+    "pg": "^8.13.3",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
