@@ -4,11 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 const router = express.Router();
 
-const animals = [
-    {common_name:"Emerald green tree boa",scientific_name:"Boa caninus",lifespan:76,habitat:"savannah",diet:"carnivore"},
-    {common_name:"Ostrich",scientific_name:"Struthio camelus",lifespan:83,habitat:"savannah",diet:"carnivore"},
-    {common_name:"Jaguar",scientific_name:"Panthera onca",lifespan:28,habitat:"tundra",diet:"herbivore"},
-    {common_name:"Tortoise, desert",scientific_name:"Gopherus agassizii",lifespan:64,habitat:"desert",diet:"herbivore"}
+let animals = [
+
     
 ]
 
@@ -29,6 +26,22 @@ router.post('/', (req,res) => {
 
 }); //send some data to the server for the animals to be created 
 
+router.get('/:id', (req, res) => {
+    const { id } = req.params; 
+
+    const foundAnimal = animals.find((animal) => animal.id === id );
+
+    res.send(foundAnimal);
+});
+
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+
+
+    animals = animals.filter((animal) => animal.id !== id);
+
+    res.send(`User with the id ${id} has been deleted`)
+})
 
 
 export default router;
