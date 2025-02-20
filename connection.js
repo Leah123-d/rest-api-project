@@ -10,58 +10,20 @@ const con = new Client ({
 
 con.connect().then(() => console.log("connected"));
 
-// to CREATE a new animal - maybe I will break this up to their own files? 
-
-// con.connect ((function(err){
-//     if(err) throw err;
-//     console.log("Connect!");
-
-//     let sql = "INSERT INTO animals (common_name, scientific_name, lifespan, habitat, diet) VALUES ('duck', 'duckaroo', 30, 'water','herbaviore')";
-//     con.query(sql, function (err, result){
-//         if(err) throw err;
-//         console.log("1 record inserted result.body"); //double check this to see how I can get what I inserted to return in the console too 
-//     });
-// }));
+//to CREATE a new animal
+//let createSQL = "INSERT INTO animals (common_name, scientific_name, lifespan, habitat, diet) VALUES ('bird', 'birdman', 30, 'desert','herbaviore')";
 
 //to READ animals 
-
-// con.query('select * from animals',(err,res) =>{
-//     if(!err){
-
-//         console.log(res.rows);
-//     }
-//     else{
-//         console.log(err.message);
-//     }
-//     con.end
-// })
-
-
+// let readSQL = "SELECT * FROM animals";
 
 //to UPDATE an existing animal 
+//let udpateSQL = "UPDATE animals SET scientific_name = 'Anatidae' WHERE common_name = 'duck'";
 
-// con.connect((function(err) {
-//     if (err) throw err; 
-//     console.log("error!");
-
-//     let sql = "UPDATE animals SET scientific_name = 'Anatidae' WHERE common_name = 'duck'";
-
-//     con.query(sql, function (err, result){
-//         if (err) throw err;
-//         console.log(result.affectedRows + `record(s) updated`); //figure out how to get this message more clear
-//     })
-// }))
-
-// 
 
 //to DELETE an existing animal
+let deleteSQL = "DELETE FROM animals WHERE common_name = 'cat'";
 
-
-//to READ animals 
-
-let sql = "DELETE FROM animals WHERE common_name = 'duck'";
-
- con.query(sql, (err,res) =>{
+ con.query(deleteSQL, (err,res) =>{
      if(!err){
 
          console.log(res.rows);
@@ -73,4 +35,4 @@ let sql = "DELETE FROM animals WHERE common_name = 'duck'";
  });
 
 
-//module.exports = con;
+module.exports = con;
