@@ -43,5 +43,29 @@ router.delete('/:id', (req, res) => {
     res.send(`User with the id ${id} has been deleted`)
 })
 
+router.patch('/:id', (req, res) => {
+    const { id } = req.params;
+    //what can we receive 
+
+    const  { common_name, scientific_name, lifespan } = req.body; //take everything from the req.body
+
+    const animalUpdate = animals.find((animal) => animal.id === id);
+
+    //need to add the things we want to replace as well as select the animal based on the uuid 
+
+    //these are the properties the user can update 
+    if(common_name){
+        animalUpdate.common_name = common_name;
+    }
+    if(scientific_name){
+        animalUpdate.scientific_name = scientific_name;
+    }
+    if(lifespan){
+        animalUpdate.lifespan = lifespan;
+    }
+
+    res.send(`User with ${id} has been updated`)
+})
+
 
 export default router;
