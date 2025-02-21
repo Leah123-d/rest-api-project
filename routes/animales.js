@@ -1,6 +1,6 @@
 //Updated API endpoints to use SQL queries
 import express from 'express';
-//import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import server from '../server.js'
 
 const router = express.Router();
@@ -16,6 +16,7 @@ router.post('/', async (req,res) => {
         'INSERT INTO animales (id, common_name, scientific_name, lifespan, habitat, diet) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
         [uuidv4(), common_name, scientific_name, lifespan, habitat, diet]
     );
+    console.log(result);
     //using parameterized quries to prevent SQL injection
 
     //TO DO- ALMOST WORKING, I SET THE INCORRECT DATATYPE FOR THE UUID OR I CAN SEE WHY ID IS FILL IN NULL
@@ -73,7 +74,7 @@ router.delete('/:id', async (req, res) => {
 
 //animal example to add 
 // {
-//    "id": 20
+//    "id": 20,
 //    "common_name": "Elephant",
 //   "scientific_name": "Elephante",
 //   "lifespan": 100,
@@ -83,27 +84,27 @@ router.delete('/:id', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
     try{
-    const { id } = req.params;
-    
-    //get properties to be updated
-    const  {common_name, scientific_name, lifespan } = req.body; //take everything from the req.body
+        const { id } = req.params;
+        
+        //get properties to be updated
+        const  {common_name, scientific_name, lifespan } = req.body; //take everything from the req.body
 
-    const animalUpdate = await server.query('UPDATE animales SET common_name = $1, scientific_name = $2 WHERE id = $4 RETURNING *'
-        [common_name, scientific_name, lifespan, id]
-    );
+        const result = await server.query(
+            'UPDATE animales SET common_name = $1, scientific_name = $2, lifespan = $3 WHERE id = $4 RETURNING *',
+            [common_name, scientific_name, lifespan, id]);
 
-    if(result.rowCount === 0){
-        return res.send('Animal not found');
-    }
+        if(result.rowCount === 0){
+            return res.send('Animal not found');
+        }
 
 
-    res.send(`Animal with ${id} has been updated`)
-    }
-    catch (error){
-        console.error('Could not find album matching id: ', error);
+        res.send(`Animal with ${id} has been updated`)
+        }
+        catch (error){
+            console.error('Could not find animal matching id: ', error);
 
-    }
-});
+        }
+    });
 
 export default router;
 
