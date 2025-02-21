@@ -1,3 +1,5 @@
+//Love that this is in separate files! Great job. Tested it on localhost:3000 the welcome message does display, but when trying to go into animales, it does not work, because I do not have the local database. 
+
 //Updated API endpoints to use SQL queries
 import express from 'express';
 //import { v4 as uuidv4 } from 'uuid';
