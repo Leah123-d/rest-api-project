@@ -19,8 +19,6 @@ router.post('/', async (req,res) => {
     console.log(result);
     //using parameterized quries to prevent SQL injection
 
-    //TO DO- ALMOST WORKING, I SET THE INCORRECT DATATYPE FOR THE UUID OR I CAN SEE WHY ID IS FILL IN NULL
-
     res.send(`Animal ${result.rows[0].common_name} was added to the database`)
     } catch (error) {
         console.error('Error creating new animal: ', error);
@@ -74,12 +72,18 @@ router.delete('/:id', async (req, res) => {
 
 //animal example to add 
 // {
-//    "id": 20,
 //    "common_name": "Elephant",
-//   "scientific_name": "Elephante",
-//   "lifespan": 100,
+//   "scientific_name": "Elephaus",
+//   "lifespan": 20,
 //   "habitat": "savannah",
 //   "diet": "herbaviore"
+// }
+// {
+//    "common_name": "Kangaroo",
+//   "scientific_name": "Macropus",
+//   "lifespan": 50,
+//   "habitat": "ocean",
+//   "diet": "carnivore"
 // }
 
 router.patch('/:id', async (req, res) => {
@@ -87,11 +91,11 @@ router.patch('/:id', async (req, res) => {
         const { id } = req.params;
         
         //get properties to be updated
-        const  {common_name, scientific_name, lifespan } = req.body; //take everything from the req.body
+        const  {common_name, scientific_name, lifespan, habitat, diet } = req.body; //take everything from the req.body
 
         const result = await server.query(
-            'UPDATE animales SET common_name = $1, scientific_name = $2, lifespan = $3 WHERE id = $4 RETURNING *',
-            [common_name, scientific_name, lifespan, id]);
+            'UPDATE animales SET common_name = $1, scientific_name = $2, lifespan = $3, habitat = $4, diet = $5 WHERE id = $6 RETURNING *',
+            [common_name, scientific_name, lifespan, habitat, diet, id]);
 
         if(result.rowCount === 0){
             return res.send('Animal not found');
