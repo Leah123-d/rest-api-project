@@ -10,13 +10,16 @@ const {
 
 
 
-export const Client = new Pool({
+const Client = new Pool({
     host: POSTGRES_HOST,
     database: POSTGRES_DB,
     user: POSTGRES_USER,
     password: POSTGRES_PASSWORD
 });
 
-con.connect().then(() => console.log("connected"));
+Client.connect()
+    .then(() => console.log("connected to the database"))
+    .catch(err => console.error("connection error", err));
 
 
+module.exports = Client;

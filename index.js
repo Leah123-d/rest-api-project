@@ -1,28 +1,26 @@
 import express from 'express';
+import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
-//import animalsRoutes from './routes/animals.js';
-import server from 'server.js';
-import animales from 'animales.js';
+
+
+dotenv.config();
 
 
 const app = express();
-const port = 3000;
 
-app.use(bodyParser.json())
 
-app.get('/', (req,res) => res.send("Hello")); //test connection to the home page
+app.use(bodyParser.json()) //Middleware to parse JSON
+import animalRoutes from './routes/animales.js';
+app.use('/animales', animalRoutes); 
+//all our routes are in a different file, 
+// when the requests are sent to our server the correct information/ actions will be taken
 
-//app.use('/animals', animalsRoutes); // I think this is how I will be able to access the routes 
 
-app.use('/animals', createAnimal); 
-app.use('/animals', getAnimals); 
-app.use('/animals', getAnimalById); 
-app.use('/animals', updateAnimal); 
-app.use('/animals', deleteAnimal); 
+app.get('/', (req,res) => res.send("Hello! This is the homepage!")); //test connection to the home page
 
 
 
-
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`API server is listening on PORT ${port}`)
 })
