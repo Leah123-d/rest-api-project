@@ -1,7 +1,10 @@
+//before endpoints were adjust to work with SQL queries
+
 import { v4 as uuidv4 } from 'uuid';
 
 let animals = []
 
+//send some data to the server for the animals to be created 
 export const createAnimal = (req,res) => {
     console.log('POST ROUTE REACHED');
 
@@ -11,9 +14,9 @@ export const createAnimal = (req,res) => {
 
     res.send(`Animal ${animal.common_name} was added to the database`)
 
-} //send some data to the server for the animals to be created 
+} 
 
-export const getAnimals =  (req,res) => {
+export const getAnimals = (req,res) => {
     console.log(animals);
     res.send(animals)
 }

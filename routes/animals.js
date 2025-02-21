@@ -1,3 +1,5 @@
+//these are routes before sql query implementation
+
 import express from 'express';
 
 import { createAnimal } from '../controllers/animals.js'
