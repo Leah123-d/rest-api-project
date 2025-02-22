@@ -2,6 +2,8 @@
 
 This project is to demonstrate the skills of creating an API server and making API requests. 
 
+Here are the [guidelines](https://github.com/Techtonica/curriculum/blob/main/projects/rest-api-project.md) for this project. 
+
 Demonstration
 
 
